@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Request Submitted!</title>
+</head>
+<body>
+    <h1>Request Submitted</h1>
+    <p th:text="'Link: ' + ${songRequest.link}"></p>
+    <a href="request">Request another song</a>
+</body>
+</html>
