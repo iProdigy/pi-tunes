@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Song Queue</title>
+</head>
+<body>
+    <h1>Song Request Queue (<span th:text="${songRequest.requests.size()}"></span>):</h1>
+    <ol>
+        <div th:each="req : ${songRequest.requests}">
+            <li th:text="${req.link}"></li>
+        </div>
+    </ol>
+
+    <br />
+    <p><a href="/">Home</a> | <a href="/request">Request a Song</a></p>
+</body>
+</html>

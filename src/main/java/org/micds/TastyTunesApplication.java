@@ -12,6 +12,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @SpringBootApplication
 public class TastyTunesApplication {
 
+    @RequestMapping(value = "/queue", method = RequestMethod.GET)
+    public String queue() {
+        return "queue";
+    }
+
     @RequestMapping(value = "/request", method = RequestMethod.GET)
     public String requestForm(Model model) {
         model.addAttribute("req", new SongRequest());
@@ -21,6 +26,7 @@ public class TastyTunesApplication {
     @RequestMapping(value = "/request", method = RequestMethod.POST)
     public String requestSubmit(@ModelAttribute SongRequest req, Model model) {
         model.addAttribute("req", req);
+        RequestQueue.getQueue().add(req);
         return "result";
     }
 
