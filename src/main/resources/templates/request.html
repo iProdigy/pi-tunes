@@ -8,7 +8,8 @@
     <h1>Request a Song</h1>
 
     <form action="#" th:action="@{/request}" th:object="${songRequest}" method="post">
-        <p>Link: <input type="text" th:field="*{link}" th:class="${songRequest.hasErrors('link')}? fieldError" /></p>
+        <p>Link: <input type="text" th:field="*{link}" /></p>
+        <span th:if="${#fields.hasErrors('link')}" th:errors="*{link}">Link Error</span>
         <p><input type="submit" value="Submit"/> <input type="reset" value="Reset"/></p>
     </form>
 
