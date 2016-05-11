@@ -1,6 +1,7 @@
 package org.micds;
 
 import lombok.Data;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.NotNull;
 import java.net.MalformedURLException;
@@ -11,6 +12,7 @@ public class SongRequest {
     private final RequestQueue requests = RequestQueue.getQueue();
 
     @NotNull
+    @NotEmpty
     @org.hibernate.validator.constraints.URL
     private String link;
 
