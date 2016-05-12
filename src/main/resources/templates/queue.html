@@ -8,7 +8,7 @@
     <h1>Song Request Queue (<span th:text="${songRequest.requests.size()}"></span>):</h1>
     <ol>
         <div th:each="req : ${songRequest.requests}">
-            <li th:text="${req.link}"></li>
+            <a th:href="${req.link}"><li th:text="${req.title}"></li></a>
         </div>
     </ol>
 

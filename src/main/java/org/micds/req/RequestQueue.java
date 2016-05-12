@@ -1,4 +1,4 @@
-package org.micds;
+package org.micds.req;
 
 import java.util.ArrayDeque;
 
@@ -8,4 +8,5 @@ public class RequestQueue extends ArrayDeque<SongRequest> {
     public static RequestQueue getQueue() {
         return INSTANCE;
     }
+
 }
