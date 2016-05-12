@@ -8,18 +8,15 @@ import javax.validation.constraints.NotNull;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-@ToString
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "link")
 public class SongRequest {
-    @Getter
     private final RequestQueue requests = RequestQueue.getQueue();
 
     private String title;
 
-    @Getter
-    @Setter
     @NotNull
     @NotEmpty
     @org.hibernate.validator.constraints.URL
