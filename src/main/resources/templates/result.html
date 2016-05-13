@@ -1,13 +1,79 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+    <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8; width=device-width, initial-scale=1.0" name="viewport"/>
     <title>Request Submitted!</title>
 </head>
 <body>
-    <h1>Request Submitted</h1>
-    <p>Link: <a th:href="${songRequest.link}" th:text="${songRequest.title}"></a></p>
-    <br />
-    <p><a href="/request">Request another song</a> | <a href="/queue">View the Queue</a></p>
+    <nav role="navigation">
+        <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo">Logo</a>
+            <ul class="right hide-on-med-and-down">
+                <li><a href="/request">Request</a></li>
+                <li><a href="/queue">Queue</a></li>
+            </ul>
+
+            <ul id="nav-mobile" class="side-nav">
+                <li><a href="/request">Request</a></li>
+                <li><a href="/queue">Queue</a></li>
+            </ul>
+
+            <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+        </div>
+    </nav>
+
+    <main class="container">
+        <br /><br />
+
+        <h3 class="header">Request Submitted</h3>
+        <p class="flow-text">Link: <a th:href="${songRequest.link}" th:text="${songRequest.title}"></a></p>
+
+        <a href="/request" id="request-button" class="btn waves-effect waves-light green">Request another<i class="material-icons right">music_note</i></a>
+        <a href="/queue" id="queue-button" class="btn waves-effect waves-light green">View the Queue<i class="material-icons right">list</i></a>
+
+        <br /><br />
+    </main>
+
+    <footer class="page-footer orange">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="white-text">Company Bio</h5>
+                    <p class="grey-text text-lighten-4">We are a team of college students working on this project like it's our full time job. Any amount would help support and continue development on this project and is greatly appreciated.</p>
+
+
+                </div>
+                <div class="col l3 s12">
+                    <h5 class="white-text">Settings</h5>
+                    <ul>
+                        <li><a class="white-text" href="#!">Link 1</a></li>
+                        <li><a class="white-text" href="#!">Link 2</a></li>
+                        <li><a class="white-text" href="#!">Link 3</a></li>
+                        <li><a class="white-text" href="#!">Link 4</a></li>
+                    </ul>
+                </div>
+                <div class="col l3 s12">
+                    <h5 class="white-text">Connect</h5>
+                    <ul>
+                        <li><a class="white-text" href="#!">Link 1</a></li>
+                        <li><a class="white-text" href="#!">Link 2</a></li>
+                        <li><a class="white-text" href="#!">Link 3</a></li>
+                        <li><a class="white-text" href="#!">Link 4</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                Made by <a class="orange-text text-lighten-3" href="http://micds.org">AP Computer Science Period D</a>
+            </div>
+        </div>
+    </footer>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+    <script src="js/init.js"></script>
 </body>
 </html>
