@@ -28,7 +28,7 @@
         <br /><br />
 
         <h3 class="header">Request Submitted</h3>
-        <p class="flow-text">Link: <a th:href="${songRequest.link}" th:text="${songRequest.title}"></a></p>
+        <p class="flow-text">Link: <a target="_blank" th:href="${songRequest.link}" th:text="${songRequest.title}"></a></p>
 
         <a href="/request" id="request-button" class="btn waves-effect waves-light green">Request another<i class="material-icons right">music_note</i></a>
         <a href="/queue" id="queue-button" class="btn waves-effect waves-light green">View the Queue<i class="material-icons right">list</i></a>

@@ -17,7 +17,7 @@ public class HttpUtil {
         boolean foundStartTag = false;
         boolean foundEndTag = false;
         int startIndex, endIndex;
-        String title = "";
+        StringBuilder title = new StringBuilder();
 
         try {
             br = new BufferedReader(new InputStreamReader(url.openStream()));
@@ -36,7 +36,7 @@ public class HttpUtil {
                 }
 
                 if (foundStartTag || foundEndTag) {
-                    title += line.substring(startIndex + TITLE_START.length(), endIndex);
+                    title.append(line.substring(startIndex + TITLE_START.length(), endIndex));
                 }
             }
 
@@ -45,7 +45,7 @@ public class HttpUtil {
             System.out.println(e);
         }
 
-        return title;
+        return title.toString();
     }
 
 }

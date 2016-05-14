@@ -10,21 +10,15 @@ import java.net.URL;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 @EqualsAndHashCode(of = "link")
 public class SongRequest {
-    private final RequestQueue requests = RequestQueue.getQueue();
-
-    private String title;
 
     @NotNull
     @NotEmpty
     @org.hibernate.validator.constraints.URL
     private String link;
 
-    public URL toURL() throws MalformedURLException {
-        return new URL(link);
-    }
+    private String title;
 
     public String getTitle() {
         if (title != null)
@@ -36,6 +30,10 @@ public class SongRequest {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public URL toURL() throws MalformedURLException {
+        return new URL(link);
     }
 
 }

@@ -35,7 +35,7 @@
                     <input id="link" type="text" th:field="*{link}" />
                     <label for="link">Link</label>
 
-                    <span th:if="${#fields.hasErrors('link')}" th:errors="*{link}">Link Error</span>
+                    <p class="light" th:if="${#fields.hasErrors('link')}" th:errors="*{link}">Link Error</p>
                 </div>
             </div>
 
