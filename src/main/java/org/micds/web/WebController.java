@@ -1,8 +1,8 @@
-package org.micds;
+package org.micds.web;
 
+import org.micds.player.SongClient;
 import org.micds.req.RequestQueue;
 import org.micds.req.SongRequest;
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +15,7 @@ import javax.validation.Valid;
 
 @Controller
 @SpringBootApplication
-public class TastyTunesApplication {
+public class WebController {
 
     @RequestMapping(value = "/queue", method = RequestMethod.GET)
     public String queue() {
@@ -36,6 +36,7 @@ public class TastyTunesApplication {
 
         model.addAttribute("req", req);
         RequestQueue.getQueue().add(req);
+        new Thread(() -> SongClient.getInstance().update()).start(); // avoid blocking this thread
         return "result";
     }
 
@@ -48,10 +49,6 @@ public class TastyTunesApplication {
     public SongRequest createModel() {
         // Expose SongRequest as a model attribute so it can be bound to a bean
         return new SongRequest();
-    }
-
-    public static void main(String[] args) {
-        SpringApplication.run(TastyTunesApplication.class, args);
     }
 
 }

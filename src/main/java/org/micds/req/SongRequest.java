@@ -1,6 +1,7 @@
 package org.micds.req;
 
-import lombok.*;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.micds.util.HttpUtil;
 
@@ -9,7 +10,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 @Data
-@NoArgsConstructor
 @EqualsAndHashCode(of = "link")
 public class SongRequest {
 
