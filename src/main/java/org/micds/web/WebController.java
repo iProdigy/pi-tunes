@@ -1,7 +1,6 @@
 package org.micds.web;
 
-import org.micds.player.SongClient;
-import org.micds.req.RequestQueue;
+import org.micds.TastyTunes;
 import org.micds.req.SongRequest;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Controller;
@@ -30,13 +29,14 @@ public class WebController {
 
     @RequestMapping(value = "/request", method = RequestMethod.POST)
     public String requestSubmit(@ModelAttribute @Valid SongRequest req, BindingResult bindingResult, Model model) {
+        // TODO: More validation (only allow yt and soundcloud)
         if (bindingResult.hasErrors()) {
             return "request";
         }
 
         model.addAttribute("req", req);
-        RequestQueue.getQueue().add(req);
-        new Thread(() -> SongClient.getInstance().update()).start(); // avoid blocking this thread
+        TastyTunes.getRequestQueue().add(req);
+        TastyTunes.getSongClient().updateFromNewThread();
         return "result";
     }
 
