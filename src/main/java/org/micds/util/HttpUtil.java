@@ -3,6 +3,7 @@ package org.micds.util;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import lombok.experimental.UtilityClass;
+import org.micds.TastyTunes;
 import org.micds.req.SongRequest;
 
 import java.io.BufferedReader;
@@ -58,11 +59,11 @@ public class HttpUtil {
 
         // remove website suffixes at the end
         int ytEnd = title.length() - YT_SUFFIX.length();
-        if (title.substring(ytEnd).equals(YT_SUFFIX)) {
+        if (ytEnd >= 0 && title.substring(ytEnd).equals(YT_SUFFIX)) {
             title.setLength(ytEnd);
         } else {
             int sndEnd = title.length() - SND_SUFFIX.length();
-            if (title.substring(sndEnd).equals(SND_SUFFIX)) {
+            if (sndEnd >= 0 && title.substring(sndEnd).equals(SND_SUFFIX)) {
                 title.setLength(sndEnd);
             }
         }
@@ -77,8 +78,10 @@ public class HttpUtil {
      * @param url       the url to the media to be downloaded
      */
     public static void downloadMP3(final String directory, final String url) {
-        final String[] envp = {"PATH=C:\\Users\\smehta\\Downloads\\ffmpeg-20160219-git-98a0053-win64-static\\bin"};
-        StringBuilder cmd = new StringBuilder("cmd /c C:\\Users\\smehta\\bin\\youtube-dl.exe --extract-audio --audio-format mp3 --audio-quality=320k")
+        final String[] envp = {"PATH=" + TastyTunes.getFFMPEG()};
+        StringBuilder cmd = new StringBuilder("cmd /c ")
+                .append(TastyTunes.getYouTubeDL())
+                .append(" --extract-audio --audio-format mp3 --audio-quality=320k")
                 .append(" --output ").append(directory).append(directory.endsWith("\\") ? "" : "\\")
                 .append("%(id)s.%(ext)s ").append(url);
 
@@ -133,7 +136,6 @@ public class HttpUtil {
             try {
                 URL resolve = new URL(resolveLink);
 
-                // TODO: Properly close this resource
                 BufferedReader br = new BufferedReader(new InputStreamReader(resolve.openStream()));
 
                 JsonParser jp = new JsonParser();
@@ -145,6 +147,8 @@ public class HttpUtil {
                     br = new BufferedReader(new InputStreamReader(resolve.openStream()));
                     obj = jp.parse(br).getAsJsonObject();
                 }
+
+                br.close();
 
                 if (obj.has("id")) {
                     return Optional.of(obj.get("id").getAsString());

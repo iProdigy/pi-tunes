@@ -1,11 +1,16 @@
 package org.micds.web;
 
 import org.micds.TastyTunes;
+import org.micds.req.MediaValidator;
 import org.micds.req.SongRequest;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,7 +33,7 @@ public class WebController {
     }
 
     @RequestMapping(value = "/request", method = RequestMethod.POST)
-    public String requestSubmit(@ModelAttribute @Valid SongRequest req, BindingResult bindingResult, Model model) {
+    public String requestSubmit(@ModelAttribute(value = "songRequest") @Valid SongRequest req, BindingResult bindingResult, Model model) {
         // TODO: More validation (only allow yt and soundcloud)
         if (bindingResult.hasErrors()) {
             return "request";
@@ -49,6 +54,16 @@ public class WebController {
     public SongRequest createModel() {
         // Expose SongRequest as a model attribute so it can be bound to a bean
         return new SongRequest();
+    }
+
+    @Bean
+    public Validator localValidatorFactoryBean() {
+        return new MediaValidator();
+    }
+
+    @InitBinder("songRequest")
+    public void initSongReqBinder(WebDataBinder binder) {
+        binder.addValidators(new MediaValidator());
     }
 
 }
