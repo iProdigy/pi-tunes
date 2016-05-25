@@ -3,6 +3,7 @@ package org.micds.util;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import lombok.experimental.UtilityClass;
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.micds.TastyTunes;
 import org.micds.req.SongRequest;
 
@@ -14,8 +15,9 @@ import java.util.Optional;
 
 @UtilityClass
 public class HttpUtil {
-    private static final String TITLE_START = "<title>", TITLE_END = "</title>", YT_SUFFIX = " - YouTube",
-            YT_SHORT = "youtu.be/", YT_WATCH = "watch?v=", SND_SUFFIX = " | Free Listening on SoundCloud";
+    public static final String TITLE_START = "<title>", TITLE_END = "</title>", YT_SUFFIX = " - YouTube",
+            YT_SHORT = "youtu.be/", YT_WATCH = "watch?v=", SND_SUFFIX = " | Free Listening on SoundCloud",
+            SC_LINK = "soundcloud.com", YT_LINK = "youtube.com";
 
     /**
      * Reads a web page and finds the title
@@ -68,7 +70,7 @@ public class HttpUtil {
             }
         }
 
-        return title.toString();
+        return StringEscapeUtils.unescapeHtml4(title.toString());
     }
 
     /**

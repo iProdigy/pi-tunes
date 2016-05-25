@@ -34,7 +34,6 @@ public class WebController {
 
     @RequestMapping(value = "/request", method = RequestMethod.POST)
     public String requestSubmit(@ModelAttribute(value = "songRequest") @Valid SongRequest req, BindingResult bindingResult, Model model) {
-        // TODO: More validation (only allow yt and soundcloud)
         if (bindingResult.hasErrors()) {
             return "request";
         }

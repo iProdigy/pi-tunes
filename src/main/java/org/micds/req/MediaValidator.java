@@ -1,5 +1,6 @@
 package org.micds.req;
 
+import org.micds.util.HttpUtil;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
@@ -21,13 +22,31 @@ public class MediaValidator implements Validator {
 
         try {
             URL url = req.toURL();
-            String host = url.getHost();
+            String host = url.getHost().toLowerCase();
+            String addr = req.getLink().toLowerCase();
 
-            boolean valid = host.contains("youtube.com") || host.contains("youtu.be")
-                    || host.contains("soundcloud.com");
+            final String ytLink = HttpUtil.YT_LINK, ytSLink = "youtu.be", soundLink = HttpUtil.SC_LINK;
 
-            if (!valid) {
+            final boolean yt = host.contains(ytLink),
+                    ytShort = host.contains(ytSLink),
+                    sc = host.contains(soundLink);
+
+            if (!yt && !ytShort && !sc) {
                 errors.reject(ERROR_CODE);
+            } else {
+                if (yt) {
+                    if (!addr.contains(HttpUtil.YT_WATCH)) {
+                        errors.reject(ERROR_CODE);
+                    }
+                } else {
+                    final int index = ytShort ? addr.indexOf(ytSLink) : addr.indexOf(soundLink);
+                    final int extra = addr.length() - (index + (ytShort ? ytSLink.length() : soundLink.length()));
+
+                    System.out.println(extra);
+
+                    if (extra < 3)
+                        errors.reject(ERROR_CODE);
+                }
             }
         } catch (IOException e) {
             errors.reject(ERROR_CODE);
