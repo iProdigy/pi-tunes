@@ -20,7 +20,7 @@ public class PlayerUI extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("Tasty Tunes");
-        primaryStage.setScene(this.getScene(500, 500)); // TODO: Find Pi resolution
+        primaryStage.setScene(getScene(800, 480));
         primaryStage.show();
 
         // properly shut down on close
