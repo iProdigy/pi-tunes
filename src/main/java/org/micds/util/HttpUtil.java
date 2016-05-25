@@ -3,9 +3,9 @@ package org.micds.util;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import lombok.experimental.UtilityClass;
-import org.apache.commons.lang3.StringEscapeUtils;
 import org.micds.TastyTunes;
 import org.micds.req.SongRequest;
+import org.unbescape.html.HtmlEscape;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -70,7 +70,7 @@ public class HttpUtil {
             }
         }
 
-        return StringEscapeUtils.unescapeHtml4(title.toString());
+        return HtmlEscape.unescapeHtml(title.toString());
     }
 
     /**
