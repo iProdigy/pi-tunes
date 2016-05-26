@@ -1,6 +1,6 @@
 package org.micds.web;
 
-import org.micds.TastyTunes;
+import org.micds.PiTunes;
 import org.micds.req.MediaValidator;
 import org.micds.req.SongRequest;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -39,8 +39,8 @@ public class WebController {
         }
 
         model.addAttribute("req", req);
-        TastyTunes.getRequestQueue().add(req);
-        TastyTunes.getSongClient().updateFromNewThread();
+        PiTunes.getRequestQueue().add(req);
+        PiTunes.getSongClient().updateFromNewThread();
         return "result";
     }
 

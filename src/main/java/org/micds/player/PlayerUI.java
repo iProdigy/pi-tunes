@@ -8,7 +8,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
-import org.micds.TastyTunes;
+import org.micds.PiTunes;
 import org.springframework.boot.SpringApplication;
 
 import java.io.File;
@@ -19,13 +19,13 @@ public class PlayerUI extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        primaryStage.setTitle("Tasty Tunes");
+        primaryStage.setTitle("Pi Tunes");
         primaryStage.setScene(getScene(800, 480));
         primaryStage.show();
 
         // properly shut down on close
         primaryStage.setOnCloseRequest(e -> {
-            SpringApplication.exit(TastyTunes.getWebAppContext(), () -> 0); // stop server
+            SpringApplication.exit(PiTunes.getWebAppContext(), () -> 0); // stop server
             Platform.exit(); // stop gui
             System.exit(0); // close all other threads
         });
@@ -35,7 +35,7 @@ public class PlayerUI extends Application {
         BorderPane pane = new BorderPane();
         Scene scene = new Scene(pane, width, height);
 
-        this.player = new MediaPlayer(new Media(new File(TastyTunes.getSongDirectory() + "startup.mp3").toURI().toString()));
+        this.player = new MediaPlayer(new Media(new File(PiTunes.getSongDirectory() + "startup.mp3").toURI().toString()));
         player.setAutoPlay(true);
 
         this.view = new MediaView(this.player);
@@ -71,7 +71,7 @@ public class PlayerUI extends Application {
         player.setOnEndOfMedia(() -> {
             player.stop();
             player.dispose();
-            TastyTunes.getSongClient().updateFromNewThread();
+            PiTunes.getSongClient().updateFromNewThread();
         });
     }
 

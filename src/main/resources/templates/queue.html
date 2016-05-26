@@ -27,9 +27,9 @@
         <br /><br />
 
         <ul class="collection with-header">
-            <li class="collection-header"><h3>Song Request Queue (<span class="green-text" th:text="${T(org.micds.TastyTunes).getRequestQueue().size()}"></span>):</h3></li>
+            <li class="collection-header"><h3>Song Request Queue (<span class="green-text" th:text="${T(org.micds.PiTunes).getRequestQueue().size()}"></span>):</h3></li>
 
-            <div th:each="req : ${T(org.micds.TastyTunes).getRequestQueue()}">
+            <div th:each="req : ${T(org.micds.PiTunes).getRequestQueue()}">
                 <li class="collection-item">
                     <a target="_blank" th:href="${req.link}" th:text="${req.title}"></a>
 

@@ -12,7 +12,7 @@ import java.io.File;
 import java.util.ArrayDeque;
 import java.util.Queue;
 
-public class TastyTunes {
+public class PiTunes {
     private static final Queue<SongRequest> REQUEST_QUEUE = new ArrayDeque<>();
     private static final String SONG_DIR = System.getProperty("user.home") + "\\Songs\\";
     private static final String FFMPEG_BIN = System.getProperty("user.home") + "\\ffmpeg\\bin";

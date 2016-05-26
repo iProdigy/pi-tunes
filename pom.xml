@@ -4,11 +4,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.micds</groupId>
-    <artifactId>tasty-tunes</artifactId>
+    <artifactId>pi-tunes</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>tasty-tunes</name>
+    <name>pi-tunes</name>
     <description>Raspberry Pi Jukebox with Web Interface</description>
 
     <parent>
@@ -60,8 +60,18 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>8.4.0</version>
                 <configuration>
-                    <mainClass>org.micds.TastyTunes</mainClass>
+                    <mainClass>org.micds.PiTunes</mainClass>
+                    <verbose>true</verbose>
                 </configuration>
+                <executions>
+                    <execution>
+                        <id>create-jfxjar</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>build-jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

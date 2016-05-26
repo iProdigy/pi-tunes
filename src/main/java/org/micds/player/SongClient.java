@@ -1,7 +1,7 @@
 package org.micds.player;
 
 import lombok.Synchronized;
-import org.micds.TastyTunes;
+import org.micds.PiTunes;
 import org.micds.req.SongRequest;
 import org.micds.util.HttpUtil;
 import org.micds.web.WebController;
@@ -12,7 +12,7 @@ import java.util.Optional;
 import java.util.Queue;
 
 public class SongClient {
-    private static final Queue<SongRequest> requests = TastyTunes.getRequestQueue();
+    private static final Queue<SongRequest> requests = PiTunes.getRequestQueue();
     private final PlayerUI gui = new PlayerUI();
 
     @Synchronized
@@ -22,7 +22,7 @@ public class SongClient {
             Optional<File> mp3 = next.getFile();
 
             if (!mp3.isPresent()) {
-                HttpUtil.downloadMP3(TastyTunes.getSongDirectory(), next.getLink()); // TODO: Don't download really long videos
+                HttpUtil.downloadMP3(PiTunes.getSongDirectory(), next.getLink()); // TODO: Don't download really long videos
                 mp3 = next.getFile();
 
                 // File not present after downloading, let's move on

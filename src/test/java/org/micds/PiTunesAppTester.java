@@ -8,7 +8,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = WebController.class)
-public class TastyTunesAppTester {
+public class PiTunesAppTester {
 
     @Test
     public void contextLoads() {

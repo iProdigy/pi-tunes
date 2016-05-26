@@ -3,7 +3,7 @@ package org.micds.util;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import lombok.experimental.UtilityClass;
-import org.micds.TastyTunes;
+import org.micds.PiTunes;
 import org.micds.req.SongRequest;
 import org.unbescape.html.HtmlEscape;
 
@@ -80,9 +80,9 @@ public class HttpUtil {
      * @param url       the url to the media to be downloaded
      */
     public static void downloadMP3(final String directory, final String url) {
-        final String[] envp = {"PATH=" + TastyTunes.getFFMPEG()};
+        final String[] envp = {"PATH=" + PiTunes.getFFMPEG()};
         StringBuilder cmd = new StringBuilder("cmd /c ")
-                .append(TastyTunes.getYouTubeDL())
+                .append(PiTunes.getYouTubeDL())
                 .append(" --extract-audio --audio-format mp3 --audio-quality=320k")
                 .append(" --output ").append(directory).append(directory.endsWith("\\") ? "" : "\\")
                 .append("%(id)s.%(ext)s ").append(url);

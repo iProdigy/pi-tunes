@@ -3,7 +3,7 @@ package org.micds.req;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.validator.constraints.NotEmpty;
-import org.micds.TastyTunes;
+import org.micds.PiTunes;
 import org.micds.util.HttpUtil;
 
 import javax.validation.constraints.NotNull;
@@ -55,7 +55,7 @@ public class SongRequest {
         final Optional<String> id = this.getID();
         final String search = (id.isPresent() ? id.get() : this.getTitle()) + ".mp3";
 
-        try (Stream<Path> paths = Files.walk(Paths.get(TastyTunes.getSongDirectory()))) {
+        try (Stream<Path> paths = Files.walk(Paths.get(PiTunes.getSongDirectory()))) {
             Optional<Path> filePath = paths.filter(path -> path.toFile().isFile())
                     .filter(path -> path.toFile().getName().equalsIgnoreCase(search))
                     .findFirst();
