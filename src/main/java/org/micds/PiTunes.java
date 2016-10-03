@@ -15,8 +15,6 @@ import java.util.Queue;
 public class PiTunes {
     private static final Queue<SongRequest> REQUEST_QUEUE = new ArrayDeque<>();
     private static final String SONG_DIR = System.getProperty("user.home") + "\\Songs\\";
-    private static final String FFMPEG_BIN = System.getProperty("user.home") + "\\ffmpeg\\bin";
-    private static final String YT_DL_BIN = System.getProperty("user.home") + "\\bin\\youtube-dl.exe";
     private static final SongClient SONG_CLIENT = new SongClient();
     private static ApplicationContext APP_CONTEXT;
 
@@ -33,14 +31,6 @@ public class PiTunes {
 
     public static Queue<SongRequest> getRequestQueue() {
         return REQUEST_QUEUE;
-    }
-
-    public static String getFFMPEG() {
-        return FFMPEG_BIN;
-    }
-
-    public static String getYouTubeDL() {
-        return YT_DL_BIN;
     }
 
     public static String getSongDirectory() {

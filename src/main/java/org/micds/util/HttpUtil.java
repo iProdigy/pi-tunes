@@ -80,22 +80,19 @@ public class HttpUtil {
      * @param url       the url to the media to be downloaded
      */
     public static void downloadMP3(final String directory, final String url) {
-        final String[] envp = {"PATH=" + PiTunes.getFFMPEG()};
-        StringBuilder cmd = new StringBuilder("cmd /c ")
-                .append(PiTunes.getYouTubeDL())
-                .append(" --extract-audio --audio-format mp3 --audio-quality=320k")
+        StringBuilder cmd = new StringBuilder("youtube-dl --extract-audio --audio-format mp3 --audio-quality=320k")
                 .append(" --output ").append(directory).append(directory.endsWith("\\") ? "" : "\\")
                 .append("%(id)s.%(ext)s ").append(url);
 
         try {
-            Process p = Runtime.getRuntime().exec(cmd.toString(), envp);
+            Process p = Runtime.getRuntime().exec(cmd.toString());
 
             /*
             BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
             BufferedReader stdError = new BufferedReader(new InputStreamReader(p.getErrorStream()));
 
             System.out.println("output:\n");
-            String s = null;
+            String s;
             while ((s = stdInput.readLine()) != null) {
                 System.out.println(s);
             }
