@@ -12,6 +12,7 @@ import org.micds.PiTunes;
 import org.springframework.boot.SpringApplication;
 
 import java.io.File;
+import java.net.URISyntaxException;
 
 public class PlayerUI extends Application {
     private MediaPlayer player;
@@ -35,7 +36,13 @@ public class PlayerUI extends Application {
         BorderPane pane = new BorderPane();
         Scene scene = new Scene(pane, width, height);
 
-        this.player = new MediaPlayer(new Media(new File(getClass().getClassLoader().getResource("startup.mp3").getFile()).toURI().toString()));
+        try {
+            this.player = new MediaPlayer(new Media(getClass().getClassLoader().getResource("startup.mp3").toURI().toString()));
+        } catch (URISyntaxException | NullPointerException e) {
+            e.printStackTrace();
+            return scene;
+        }
+
         player.setAutoPlay(true);
 
         this.view = new MediaView(this.player);
