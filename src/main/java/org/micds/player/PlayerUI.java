@@ -35,7 +35,7 @@ public class PlayerUI extends Application {
         BorderPane pane = new BorderPane();
         Scene scene = new Scene(pane, width, height);
 
-        this.player = new MediaPlayer(new Media(new File(PiTunes.getSongDirectory() + "startup.mp3").toURI().toString()));
+        this.player = new MediaPlayer(new Media(new File(getClass().getClassLoader().getResource("startup.mp3").getFile()).toURI().toString()));
         player.setAutoPlay(true);
 
         this.view = new MediaView(this.player);
